@@ -26,16 +26,21 @@ RUN set -x \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         ca-certificates \
-        gvfs-bin \
-        gvfs-fuse \
-        gvfs-backends \
-    && rm -rf /var/lib/apt/lists/*
+        curl \
+        unzip \
+        fuse \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -s https://rclone.org/install.sh | bash \
+    && mkdir -p /root/.config/rclone \
+    && mkdir -p /home/.config/rclone
 
 # Create and change to the app directory.
 WORKDIR /
 
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /app/server /app/server
+COPY rclone.conf /root/.config/rclone/
+COPY rclone.conf /home/.config/rclone/
 COPY script.sh ./
 
 # Run the web service on container startup.

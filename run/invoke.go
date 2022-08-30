@@ -20,6 +20,7 @@ type PubSubMessage struct {
 }
 
 type PubSubMessageData struct {
+	System string `json:"system"`
 	Source string `json:"source"`
 	Destination string `json:"destination"`
 }
@@ -62,6 +63,7 @@ func scriptHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	os.Setenv("SYSTEM", data.System)
 	os.Setenv("SOURCE", data.Source)
 	os.Setenv("DESTINATION", data.Destination)
 
