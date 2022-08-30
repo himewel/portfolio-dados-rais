@@ -17,7 +17,7 @@ resource "google_cloud_run_service" "run_service" {
         resources {
           requests = {
             memory = "512Mi"
-            cpu    = "500m"
+            cpu    = "250m"
           }
         }
       }

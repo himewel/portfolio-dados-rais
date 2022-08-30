@@ -8,6 +8,10 @@ resource "google_pubsub_schema" "schema" {
   "name": "Avro",
   "fields": [
     {
+      "name": "system",
+      "type": "string"
+    },
+    {
       "name": "source",
       "type": "string"
     },
@@ -33,6 +37,8 @@ resource "google_pubsub_topic" "topic" {
 resource "google_pubsub_subscription" "subscription" {
   name  = "ftp-to-gcs-subscription"
   topic = google_pubsub_topic.topic.name
+
+  ack_deadline_seconds = 600
 
   push_config {
     push_endpoint = google_cloud_run_service.run_service.status[0].url
