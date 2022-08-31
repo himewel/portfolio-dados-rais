@@ -3,7 +3,7 @@ terraform {
 
   backend "gcs" {
     bucket = "tf-backend-270822"
-    prefix = "terraform/state/run"
+    prefix = "terraform/state/ftp-to-gcs"
   }
 
   required_providers {

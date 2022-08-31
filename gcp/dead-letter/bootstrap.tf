@@ -3,7 +3,7 @@ terraform {
 
   backend "gcs" {
     bucket = "tf-backend-270822"
-    prefix = "terraform/state/pubsub"
+    prefix = "terraform/state/dead-letter"
   }
 
   required_providers {
