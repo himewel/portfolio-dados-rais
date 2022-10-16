@@ -63,6 +63,8 @@ func scriptHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Printf("Copying from %s in %s to %s", data.System, data.Source, data.Destination)
+
 	os.Setenv("SYSTEM", data.System)
 	os.Setenv("SOURCE", data.Source)
 	os.Setenv("DESTINATION", data.Destination)
